@@ -8,12 +8,12 @@ export class Todo {
   @Column()
   title: string;
 
-  @Column()
-  description?: string;
+  @Column({ nullable: true })
+  description: string;
 
   @Column({ default: false })
   status: boolean;
 
-  @Column()
+  @Column({ nullable: true })
   dueDate: Date;
 }
