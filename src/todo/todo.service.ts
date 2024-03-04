@@ -1,13 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { TodoRepository } from './repositories/todo.repository';
 import { Todo } from './entities/todo.entity';
+import { CreateTodoDto } from './dto/create-todo.dto';
+import { UpdateTodoDto } from './dto/update-todo.dto';
 
 @Injectable()
 export class TodoService {
   constructor(private readonly todoRepository: TodoRepository) {}
 
-  async create(todo: Todo): Promise<Todo> {
-    return this.todoRepository.createTodo(todo);
+  async create(createTodoDto: CreateTodoDto): Promise<Todo> {
+    return this.todoRepository.createTodo(createTodoDto);
   }
 
   async findAllTodos(): Promise<Todo[]> {
@@ -18,8 +20,11 @@ export class TodoService {
     return this.todoRepository.findTodoById(id);
   }
 
-  async updateTodo(id: number, updateTodo: Todo): Promise<Todo | undefined> {
-    return this.todoRepository.updateTodo(id, updateTodo);
+  async updateTodo(
+    id: number,
+    updateTodoDto: UpdateTodoDto,
+  ): Promise<Todo | undefined> {
+    return this.todoRepository.updateTodo(id, updateTodoDto);
   }
 
   async deleteTodo(id: number) {

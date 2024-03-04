@@ -1,6 +1,8 @@
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Todo } from '../entities/todo.entity';
+import { UpdateTodoDto } from '../dto/update-todo.dto';
+import { CreateTodoDto } from '../dto/create-todo.dto';
 
 export class TodoRepository extends Repository<Todo> {
   constructor(
@@ -11,8 +13,8 @@ export class TodoRepository extends Repository<Todo> {
   }
 
   // Create (C)
-  async createTodo(todo: Todo): Promise<Todo> {
-    const newTodo = this.create(todo);
+  async createTodo(createTodoDto: CreateTodoDto): Promise<Todo> {
+    const newTodo = this.create(createTodoDto);
     return this.save(newTodo);
   }
 
@@ -26,8 +28,11 @@ export class TodoRepository extends Repository<Todo> {
   }
 
   // Update (U)
-  async updateTodo(id: number, updatedTodo: Todo): Promise<Todo | undefined> {
-    await this.update(id, updatedTodo);
+  async updateTodo(
+    id: number,
+    updateTodoDto: UpdateTodoDto,
+  ): Promise<Todo | undefined> {
+    await this.update(id, updateTodoDto);
     return this.findOne({ where: { id } });
   }
 
