@@ -1,19 +1,25 @@
-import { IsBoolean, IsDate, IsNotEmpty, IsString } from 'class-validator';
+import {
+  IsBoolean,
+  IsDate,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+} from 'class-validator';
 
 export class CreateTodoDto {
-  @IsNotEmpty()
+  @IsNotEmpty({ message: 'Title cannot be empty' })
   @IsString()
   title: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   description: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsBoolean()
-  status: boolean;
+  complete: false;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsDate()
   dueDate: Date;
 }

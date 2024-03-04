@@ -5,14 +5,14 @@ export class Todo {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ nullable: false })
   title: string;
 
   @Column({ nullable: true })
   description: string;
 
   @Column({ default: false })
-  status: boolean;
+  complete: boolean;
 
   @Column({ nullable: true })
   dueDate: Date;
