@@ -8,14 +8,15 @@ import {
   Delete,
 } from '@nestjs/common';
 import { TodoService } from './todo.service';
-import { Todo } from './entities/todo.entity';
+import { CreateTodoDto } from './dto/create-todo.dto';
+import { UpdateTodoDto } from './dto/update-todo.dto';
 
 @Controller('todo')
 export class TodoController {
   constructor(private readonly todoService: TodoService) {}
 
   @Post()
-  create(@Body() createTodo: Todo) {
+  create(@Body() createTodo: CreateTodoDto) {
     return this.todoService.create(createTodo);
   }
 
@@ -30,8 +31,8 @@ export class TodoController {
   }
 
   @Patch(':id')
-  updateTodo(@Param('id') id: string, @Body() updateTodo: Todo) {
-    return this.todoService.updateTodo(+id, updateTodo);
+  updateTodo(@Param('id') id: string, @Body() updateTodoDto: UpdateTodoDto) {
+    return this.todoService.updateTodo(+id, updateTodoDto);
   }
 
   @Delete(':id')
